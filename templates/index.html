@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bug Report Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Bug Report Analyzer</h1>
+    <p>Describe a bug in plain language and get a triaged report with severity and likely causes.</p>
+  </header>
+
+  <main class="layout">
+    <section class="input" aria-labelledby="in-h">
+      <h2 id="in-h">What went wrong?</h2>
+      <form id="form">
+        <label for="bug" class="sr-only">Bug description</label>
+        <textarea id="bug" rows="10" maxlength="5000"
+          placeholder="What did you do, what did you expect, and what happened instead? Mention browser, device, or how often it happens."></textarea>
+        <div class="meta"><span id="count">0 / 5000</span></div>
+
+        <div class="examples" role="group" aria-label="Example bugs">
+          <span>Try an example:</span>
+          <button type="button" class="chip" data-ex="0">Double charge</button>
+          <button type="button" class="chip" data-ex="1">Slow search</button>
+          <button type="button" class="chip" data-ex="2">Misaligned logo</button>
+        </div>
+
+        <button type="submit" id="go" class="primary">Analyze bug</button>
+        <p class="hint">Tip: press Ctrl + Enter to analyze.</p>
+      </form>
+    </section>
+
+    <section class="output" aria-live="polite" aria-labelledby="out-h">
+      <h2 id="out-h" class="sr-only">Analysis</h2>
+
+      <ol id="steps" class="steps" hidden>
+        <li data-node="bug_analysis">Analyze bug</li>
+        <li data-node="severity_detection">Rate severity</li>
+        <li data-node="root_cause">Suggest causes</li>
+        <li data-node="format_report">Format report</li>
+      </ol>
+
+      <div id="empty" class="empty">
+        <p>Your report will appear here.</p>
+        <p>Describe a bug on the left, then select <strong>Analyze bug</strong>.</p>
+      </div>
+
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <article id="report" class="report" hidden>
+        <div class="band"><span id="r-sev"></span><small>severity</small></div>
+        <div class="body">
+          <h3 id="r-title"></h3>
+          <p class="feature">Affects <strong id="r-feature"></strong></p>
+
+          <h4>Summary</h4>
+          <p id="r-summary"></p>
+
+          <h4>Why this severity</h4>
+          <p id="r-reason"></p>
+
+          <h4>Possible root causes</h4>
+          <ol id="r-causes"></ol>
+
+          <div class="actions">
+            <button type="button" id="copy" class="secondary">Copy report</button>
+            <button type="button" id="reset" class="secondary">Start over</button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

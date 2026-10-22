@@ -1,0 +1,6 @@
+langgraph
+langchain-google-genai
+langchain-core
+pydantic>=2
+python-dotenv
+flask
